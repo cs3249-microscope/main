@@ -85,7 +85,7 @@ View::View(const QString &name, QWidget *parent)
 
     resetButton = new QToolButton;
     resetButton->setText(tr("0"));
-    resetButton->setEnabled(false);
+    resetButton->setEnabled(true);
 
     // Label layout
     QHBoxLayout *labelLayout = new QHBoxLayout;
@@ -128,13 +128,14 @@ View::View(const QString &name, QWidget *parent)
     labelLayout->addWidget(antialiasButton);
     labelLayout->addWidget(openGlButton);
     labelLayout->addWidget(printButton);
+    labelLayout->addWidget(resetButton);
 
     QGridLayout *topLayout = new QGridLayout;
     topLayout->addLayout(labelLayout, 0, 0);
     topLayout->addWidget(graphicsView, 1, 0);
     topLayout->addLayout(zoomSliderLayout, 1, 1);
     topLayout->addLayout(rotateSliderLayout, 2, 0);
-    topLayout->addWidget(resetButton, 2, 1);
+    //topLayout->addWidget(resetButton, 2, 1);
     setLayout(topLayout);
 
     connect(resetButton, SIGNAL(clicked()), this, SLOT(resetView()));

@@ -22,8 +22,6 @@ ImageWidget::ImageWidget(QWidget *parent) : QWidget(parent)
         view->view()->setScene(scene);
         h1Splitter->addWidget(view);
 
-
-
         QHBoxLayout *layout = new QHBoxLayout;
         layout->addWidget(vSplitter);
         setLayout(layout);
