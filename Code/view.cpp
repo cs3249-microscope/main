@@ -67,18 +67,18 @@ View::View(const QString &name, QWidget *parent)
     QToolButton *rotateRightIcon = new QToolButton;
     rotateRightIcon->setIcon(QPixmap(":/rotateright.png"));
     rotateRightIcon->setIconSize(iconSize);
-    rotateSlider = new QSlider;
-    rotateSlider->setOrientation(Qt::Horizontal);
-    rotateSlider->setMinimum(-360);
-    rotateSlider->setMaximum(360);
-    rotateSlider->setValue(0);
-    rotateSlider->setTickPosition(QSlider::TicksBelow);
+    depthSlider = new QSlider;
+    depthSlider->setOrientation(Qt::Horizontal);
+    depthSlider->setMinimum(-360);
+    depthSlider->setMaximum(360);
+    depthSlider->setValue(0);
+    depthSlider->setTickPosition(QSlider::TicksBelow);
 
     // Rotate slider layout
-    QHBoxLayout *rotateSliderLayout = new QHBoxLayout;
-    rotateSliderLayout->addWidget(rotateLeftIcon);
-    rotateSliderLayout->addWidget(rotateSlider);
-    rotateSliderLayout->addWidget(rotateRightIcon);
+    QHBoxLayout *depthSliderLayout = new QHBoxLayout;
+    depthSliderLayout->addWidget(rotateLeftIcon);
+    depthSliderLayout->addWidget(depthSlider);
+    depthSliderLayout->addWidget(rotateRightIcon);
 
     resetButton = new QToolButton;
     resetButton->setText(tr("RESET"));
@@ -101,13 +101,13 @@ View::View(const QString &name, QWidget *parent)
     topLayout->addLayout(labelLayout, 0, 0);
     topLayout->addWidget(graphicsView, 1, 0);
     topLayout->addLayout(zoomSliderLayout, 1, 1);
-    topLayout->addLayout(rotateSliderLayout, 2, 0);
+    topLayout->addLayout(depthSliderLayout, 2, 0);
     //topLayout->addWidget(resetButton, 2, 1);
     setLayout(topLayout);
 
     connect(resetButton, SIGNAL(clicked()), this, SLOT(resetView()));
     connect(zoomSlider, SIGNAL(valueChanged(int)), this, SLOT(setupMatrix()));
-    connect(rotateSlider, SIGNAL(valueChanged(int)), this, SLOT(setupMatrix()));
+    connect(depthSlider, SIGNAL(valueChanged(int)), this, SLOT(setupMatrix()));
     connect(graphicsView->verticalScrollBar(), SIGNAL(valueChanged(int)),
             this, SLOT(setResetButtonEnabled()));
     connect(graphicsView->horizontalScrollBar(), SIGNAL(valueChanged(int)),
@@ -129,7 +129,7 @@ QGraphicsView *View::view() const
 void View::resetView()
 {
     zoomSlider->setValue(250);
-    rotateSlider->setValue(0);
+    depthSlider->setValue(0);
     setupMatrix();
     graphicsView->ensureVisible(QRectF(0, 0, 0, 0));
 
@@ -147,12 +147,11 @@ void View::setupMatrix()
 
     QMatrix matrix;
     matrix.scale(scale, scale);
-    matrix.rotate(rotateSlider->value());
+    matrix.rotate(depthSlider->value());
 
     graphicsView->setMatrix(matrix);
     setResetButtonEnabled();
 }
-
 
 
 
@@ -181,10 +180,10 @@ void View::zoomOut(int level)
 
 void View::rotateLeft()
 {
-    rotateSlider->setValue(rotateSlider->value() - 10);
+    depthSlider->setValue(depthSlider->value() - 10);
 }
 
 void View::rotateRight()
 {
-    rotateSlider->setValue(rotateSlider->value() + 10);
+    depthSlider->setValue(depthSlider->value() + 10);
 }

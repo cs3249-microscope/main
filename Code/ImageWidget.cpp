@@ -4,11 +4,18 @@
 #include <QHBoxLayout>
 #include <QSplitter>
 #include <QPixmap>
+#include <QGraphicsPixmapItem>
 
 
 ImageWidget::ImageWidget(QWidget *parent) : QWidget(parent)
 {
+    inputList = new QStringList();
+    inputList->append("/file.jpeg");
+    inputList->append("/download.jpeg");
+    inputList->append("/stuff2.jpg");
     populateScene();
+    createDepthSlider();
+    connect(depthSlider, SIGNAL(valueChanged(int)), this, SLOT(Focus()));
 
     h1Splitter = new QSplitter;
     h2Splitter = new QSplitter;
@@ -22,16 +29,34 @@ ImageWidget::ImageWidget(QWidget *parent) : QWidget(parent)
         view->view()->setScene(scene);
         h1Splitter->addWidget(view);
 
-        QHBoxLayout *layout = new QHBoxLayout;
+        QVBoxLayout *layout = new QVBoxLayout;
         layout->addWidget(vSplitter);
+        layout->addWidget(depthSlider);
         setLayout(layout);
-
-        setWindowTitle(tr("Chip Example"));
 }
 
 void ImageWidget::populateScene()
 {
     scene = new QGraphicsScene;
     QImage image("/file.jpeg");
-    scene->addPixmap(QPixmap::fromImage(image));
+    picture = scene->addPixmap(QPixmap::fromImage(image));
+}
+
+void ImageWidget::createDepthSlider()
+{
+    depthSlider = new QSlider;
+    depthSlider->setOrientation(Qt::Horizontal);
+    depthSlider->setMinimum(0);
+    depthSlider->setMaximum(2);
+    depthSlider->setValue(0);
+    depthSlider->setTickPosition(QSlider::TicksBelow);
+}
+
+void ImageWidget::Focus()
+{
+    qDebug("testing");
+    QString blah = inputList->at(depthSlider->value());
+    qDebug(blah.toLatin1());
+    QImage image(inputList->at(depthSlider->value()));
+    picture->setPixmap(QPixmap::fromImage(image));
 }
