@@ -9,7 +9,7 @@
 PreviewViewer::PreviewViewer()
 {
     layout = new QHBoxLayout();
-        createWidgets();
+    createWidgets();
     createSettings();
     createActions();
     createMenus();
@@ -36,15 +36,13 @@ void PreviewViewer::closeEvent(QCloseEvent *event)
 void PreviewViewer::createWidgets()
 {
     ImageWidget *imageWidget = new ImageWidget;
-    imageWidget->setImage("/file.jpeg");
-    imageWidget->setMinimumSize(800, 800);
-    imageWidget->setMaximumSize(800, 800);
+    //imageWidget->setImage("/file.jpeg");
     QVBoxLayout* settings2Layout = new QVBoxLayout;
-    settings2Layout->addWidget(imageWidget);
-
+    //settings2Layout->addWidget(imageWidget);
     QGroupBox* testBox = new QGroupBox;
     testBox->setLayout(settings2Layout);
-    layout->addWidget(testBox);
+    testBox->setMinimumSize(800, 800);
+    layout->addWidget(imageWidget);
 
 /////    setCentralWidget(imageWidget);
 

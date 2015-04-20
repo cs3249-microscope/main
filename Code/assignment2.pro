@@ -4,7 +4,12 @@
 QT       += core gui widgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
+qtHaveModule(printsupport): QT += printsupport
+qtHaveModule(opengl): QT += opengl
+build_all:!build_pass {
+    CONFIG -= build_all
+    CONFIG += release
+}
 TEMPLATE = app
 TARGET = assgn2
 DEPENDPATH += .
@@ -12,6 +17,8 @@ INCLUDEPATH += .
 
 # Input
 HEADERS += ImageWidget.h \
-    PreviewViewer.h
+    PreviewViewer.h \
+    view.h
 SOURCES +=  main.cpp ImageWidget.cpp\
-    PreviewViewer.cpp
+    PreviewViewer.cpp \
+    view.cpp
