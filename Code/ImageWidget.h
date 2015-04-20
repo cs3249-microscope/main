@@ -17,7 +17,7 @@ class ImageWidget: public QWidget
 	
 public:
 	ImageWidget(QWidget *parent = 0);
-	void setImageSet(const QStringList &fileNames);
+	void setImageSet(const QList<QPixmap> &imageSet);
 	float getZoom() const { return zoom; } // inline
 protected:
 	void wheelEvent(QWheelEvent *event);

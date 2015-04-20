@@ -2,11 +2,13 @@
 #include <QtGui>
 #include <QGraphicsTextItem>
 #include <QTextStream>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
 #include "ImageWidget.h"
 
 ImageWidget::ImageWidget(QWidget *parent): QWidget(parent) {
-	QHBoxLayout *topLayer = new QHBoxLayout;
-	QHBoxLayout *bottomLayer = new QHBoxLayout;
+	QHBoxLayout *topLayout = new QHBoxLayout;
+	QHBoxLayout *bottomLayout = new QHBoxLayout;
 	QVBoxLayout *fullLayout = new QVBoxLayout;
 
 	createWidgets();
@@ -14,10 +16,10 @@ ImageWidget::ImageWidget(QWidget *parent): QWidget(parent) {
 	topLayout->addWidget(imageViewer);//imageviewer
 	topLayout->addWidget(zoomSlider);//VSlider
 	bottomLayout->addWidget(depthSlider);//HSlider
-	bottomLayout->addWidget();//???
+	//bottomLayout->addWidget();//???
 
-	fullLayout->addLayout(topLayer);
-	fullLayout->addLayout(bottomLayer);
+	fullLayout->addLayout(topLayout);
+	fullLayout->addLayout(bottomLayout);
 	this->setLayout(fullLayout);
 
 	// Set defaults
@@ -26,9 +28,9 @@ ImageWidget::ImageWidget(QWidget *parent): QWidget(parent) {
 	setMinimumSize(10, 10); // width, height
 }
 
-void ImageWidget::setImageSet(const QStringList &fileNames) {
-	for(int i=0;i<fileNames.size();++i){
-		inputList.append(QPixMap::QPixMap(fileNames.at[i]));
+void ImageWidget::setImageSet(const QList<QPixmap> &imageSet) {
+	for(int i=0;i<imageSet.size();++i){
+		inputList.append(imageSet[i]);
 	}
 	scene->addPixmap(inputList[0]);
 }
@@ -45,7 +47,7 @@ void ImageWidget::changeZoom(int valueFromSlider) {
 
 //protected
 void ImageWidget::wheelEvent(QWheelEvent *event) {
-	setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
+	imageViewer->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
 
 	float newZoom = zoom;	
 	if (event->delta()>0) {
@@ -63,20 +65,20 @@ void ImageWidget::wheelEvent(QWheelEvent *event) {
 //private methods
 void ImageWidget::createWidgets() {
 	zoomSlider = new QSlider(Qt::Vertical);
-	zoomSlider.setMinimum(10);
-	zoomSlider.setMaximum(1000);
+	zoomSlider->setMinimum(10);
+	zoomSlider->setMaximum(1000);
 	depthSlider = new QSlider(Qt::Horizontal);
-	depthSlider.setMinimum(1);
-	depthSlider.setMaximum(?);
+	depthSlider->setMinimum(1);
+	depthSlider->setMaximum(inputList.size());
 	
 	scene = new QGraphicsScene;
 	imageViewer->setScene(scene);
 
 	//connect sliders to mainwidget
-	connect(this, zoomChanged(int), zoomSlider, setValue(int));
-	connect(this, depthChanged(int), depthSlider, setValue(int));
-	connect(zoomSlider, valueChanged(int), this, changeZoom(int));
-	connect(depthSlider, valueChanged(int), this, changeDepth(int));
+	connect(this, SIGNAL(zoomChanged(int)), zoomSlider, SLOT(setValue(int)));
+	connect(this, SIGNAL(depthChanged(int)), depthSlider, SLOT(setValue(int)));
+	connect(zoomSlider, SIGNAL(valueChanged(int)), this, SLOT(changeZoom(int)));
+	connect(depthSlider, SIGNAL(valueChanged(int)), this, SLOT(changeDepth(int)));
 }
 
 void ImageWidget::setZoom(float newZoom) {
@@ -89,7 +91,7 @@ void ImageWidget::setZoom(float newZoom) {
 	//if (newSize.width() < minimumWidth() || newSize.height() < minimumHeight() || newSize.width() > maximumWidth() || newSize.height() > maximumHeight())
 	//	return; // no change
 	
-	scale(newZoom/zoom,newZoom/zoom);
+	imageViewer->scale(newZoom/zoom,newZoom/zoom);
 	zoom = newZoom;
 	qDebug("zoom %f", zoom); // for debugging
 	emit zoomChanged((int)zoom*10);
