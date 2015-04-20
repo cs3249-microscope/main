@@ -1,119 +1,104 @@
+// Name: Bob Wong
+// Matric No: A0094718U
+
 // ImageWidget.cpp
+
 #include <QtGui>
-#include <QGraphicsTextItem>
-#include <QTextStream>
-#include "ImageWidget.h"
+#include "imagewidget.h"
 
-ImageWidget::ImageWidget(QWidget *parent): QWidget(parent) {
-	QHBoxLayout *topLayer = new QHBoxLayout;
-	QHBoxLayout *bottomLayer = new QHBoxLayout;
-	QVBoxLayout *fullLayout = new QVBoxLayout;
-
-	createWidgets();
-
-	topLayout->addWidget(imageViewer);//imageviewer
-	topLayout->addWidget(zoomSlider);//VSlider
-	bottomLayout->addWidget(depthSlider);//HSlider
-	bottomLayout->addWidget();//???
-
-	fullLayout->addLayout(topLayer);
-	fullLayout->addLayout(bottomLayer);
-	this->setLayout(fullLayout);
-
-	// Set defaults
-	zoom = 0.1;
-	depth = 1;
-	setMinimumSize(10, 10); // width, height
+ImageWidget::ImageWidget(QWidget *parent): QWidget(parent)
+{
+    // Set defaults
+    zoom = 0.0;
+    setMinimumSize(100, 100);
 }
 
-void ImageWidget::setImageSet(const QStringList &fileNames) {
-	for(int i=0;i<fileNames.size();++i){
-		inputList.append(QPixMap::QPixMap(fileNames.at[i]));
-	}
-	scene->addPixmap(inputList[0]);
+void ImageWidget::setImage(const QString &fileName)
+{
+    QImage image = QImage(fileName);
+    input = QPixmap::fromImage(image);
+
+    // Determine initial zoom
+    float initWidth = 800;
+    float initHeight = 600;
+    float wRatio = (float) initWidth / (float) input.width();
+    float hRatio = (float) initHeight / (float) input.height();
+    float initZoom = qMin(wRatio, hRatio);
+
+    if (input.width() <= minimumWidth()
+    ||  input.height() <= minimumHeight())
+    {
+        wRatio = (float) minimumWidth() / (float) input.width();
+        hRatio = (float) minimumHeight() / (float) input.height();
+        initZoom = qMax(wRatio, hRatio);
+        setZoom(initZoom);
+    }
+
+    if (initZoom >= 1.0)
+        initZoom = 1.0;
+
+    setZoom(initZoom);
 }
 
-//public slots: slot to get change in depth (made by the gallery)
-void ImageWidget::changeDepth(int valueFromSlider) {	
-	setImage(valueFromSlider);
+void ImageWidget::setZoom(float newZoom)
+{
+    if (newZoom <= 0.0)
+        return;
+
+    QSize newSize = newZoom * input.size();
+    if (
+        newSize.width() < minimumWidth() ||
+        newSize.height() < minimumHeight() ||
+        newSize.width() > maximumWidth() ||
+        newSize.height() > maximumHeight())
+        return;
+
+    zoom = newZoom;
+    display = input.scaled(zoom * input.size(), 			   Qt::KeepAspectRatio);
+
+    resize(display.size());
+
+
+    qDebug("zoom %f", zoom);
 }
 
-//private slots: only by use of private sliders
-void ImageWidget::changeZoom(int valueFromSlider) {
-	setZoom(valueFromSlider/10.0);
+// Event handlers
+void ImageWidget::paintEvent(QPaintEvent *event)
+{
+    QRectF rect = QRectF(QPoint(), size());
+    QPainter painter(this);
+    painter.drawPixmap(rect, display, rect);
 }
 
-//protected
-void ImageWidget::wheelEvent(QWheelEvent *event) {
-	setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-
-	float newZoom = zoom;	
-	if (event->delta()>0) {
-		newZoom = zoom+0.1;
-	}
-	else if ( event->delta()<0 ) {
-		newZoom = zoom-0.1;
-	}
-	char string[100];
-	sprintf(string, "%.1f", newZoom);
-	sscanf(string, "%f", &newZoom); // rounding
-	setZoom(newZoom);
+void ImageWidget::wheelEvent(QWheelEvent *event)
+{
+    float step = event->delta() / 1200.0;
+    float newZoom = zoom + step;
+    setZoom(newZoom);
 }
 
-//private methods
-void ImageWidget::createWidgets() {
-	zoomSlider = new QSlider(Qt::Vertical);
-	zoomSlider.setMinimum(10);
-	zoomSlider.setMaximum(1000);
-	depthSlider = new QSlider(Qt::Horizontal);
-	depthSlider.setMinimum(1);
-	depthSlider.setMaximum(?);
-	
-	scene = new QGraphicsScene;
-	imageViewer->setScene(scene);
+void ImageWidget::resizeEvent(QResizeEvent *event){
 
-	//connect sliders to mainwidget
-	connect(this, zoomChanged(int), zoomSlider, setValue(int));
-	connect(this, depthChanged(int), depthSlider, setValue(int));
-	connect(zoomSlider, valueChanged(int), this, changeZoom(int));
-	connect(depthSlider, valueChanged(int), this, changeDepth(int));
-}
+    float newWidth = width();
+    float newHeight = height();
 
-void ImageWidget::setZoom(float newZoom) {
-	if (newZoom == zoom)//if there is no change in zoom
-		return;	
-	if (newZoom <= 0.0)
-		return; // no change
+    float wRatio = (float) newWidth / (float) input.width();
+    float hRatio = (float) newHeight / (float) input.height();
+    float newZoom = qMax(wRatio, hRatio);
 
-	//QSize newSize = newZoom * input.size();
-	//if (newSize.width() < minimumWidth() || newSize.height() < minimumHeight() || newSize.width() > maximumWidth() || newSize.height() > maximumHeight())
-	//	return; // no change
-	
-	scale(newZoom/zoom,newZoom/zoom);
-	zoom = newZoom;
-	qDebug("zoom %f", zoom); // for debugging
-	emit zoomChanged((int)zoom*10);
-}
+    QSize newSize = newZoom * input.size();
+    if (newSize.width() < minimumWidth() ||
+        newSize.height() < minimumHeight())
+        return;
 
-void ImageWidget::setImage(int imageNumber) {
-/*	QImage image = QImage(fileName); // Get image
-	QPixmap input = QPixmap::fromImage(image); // For display
+    if(newZoom >= 1.0 && input.width() > minimumWidth() && input.height() > minimumHeight())
+    {
+        newZoom = 1.0;
+    }
 
-	//if image is larger than initsize, scale down image to fit
-	//if image is smaller than initsize, scale up image to fit 
-	// Determine appropriate initial zoom
+    zoom = newZoom;
+    display = input.scaled(zoom * input.size(),
+                           Qt::KeepAspectRatio);
 
-	float initWidth = size().width();
-	float initHeight = size().height();
-	float wRatio = (float) initWidth / (float) input.width();
-	float hRatio = (float) initHeight / (float) input.height();
-	float initZoom = qMin(wRatio, hRatio);
-	qDebug("initZoom %f", initZoom);
-	if (initZoom >= 1.0)
-	initZoom = 1.0; // Use original size if possible.
-	setZoom(initZoom);*/
-	
-	//remove scene?
-	depth = imageNumber;
-	currDisplay->setPixmap(inputList[imageNumber]);
+    qDebug("zoom %f", zoom);
 }

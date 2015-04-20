@@ -1,48 +1,35 @@
+// Name: Bob Wong
+// Matric No: A0094718U
+
 // ImageWidget.h
+
 #ifndef IMAGEWIDGET_H
 #define IMAGEWIDGET_H
 
 #include <QWidget>
-#include <QGraphicsView>
-#include <QGraphicsScene>
-#include <QSlider>
 #include <QImage>
 #include <QPixmap>
-#include <vector>
 
 class ImageWidget: public QWidget
 {
-	Q_OBJECT
-	Q_PROPERTY(float zoom READ getZoom WRITE setZoom)
-	
+    Q_OBJECT
+    Q_PROPERTY(float zoom READ getZoom WRITE setZoom)
+
 public:
-	ImageWidget(QWidget *parent = 0);
-	void setImageSet(const QStringList &fileNames);
-	float getZoom() const { return zoom; } // inline
+    ImageWidget(QWidget *parent = 0);
+    void setImage(const QString &fileName);
+    float getZoom() const { return zoom; }
+    void setZoom(float newZoom);
+
 protected:
-	void wheelEvent(QWheelEvent *event);
-signals:
-	void zoomChanged(float newZoom);
-	void depthChanged(int newDepth);
-public slots:
-	void changeDepth(int newDepth);
-private slots:
-	void changeZoom(int newZoom);
+    void paintEvent(QPaintEvent *event);
+    void wheelEvent(QWheelEvent *event);
+    void resizeEvent(QResizeEvent *event);
+
 private:
-	void createWidgets();
-	void setZoom(float newZoom);
-	void setImage(int imageNumber);
-
-	QSlider *zoomSlider;
-	QSlider *depthSlider;
-	QGraphicsScene *scene;
-	QGraphicsView *imageViewer;
-
-	//QPoint widgetCenter;
-	//QPoint imageCenter;
-	QList<QPixmap> inputList; // Input images.
-	QGraphicsPixmapItem *currDisplay; //pointer to current displayed layer
-	int depth;	
-	float zoom;
+    QPixmap input;
+    QPixmap display;
+    float zoom;
 };
+
 #endif

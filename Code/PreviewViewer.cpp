@@ -2,16 +2,20 @@
 
 #include <QtGui>
 #include "PreviewViewer.h"
+#include <QScrollArea>
 
 // Constructor
 
 PreviewViewer::PreviewViewer()
 {
-    void createWidgets();
-    void createSettings();
-    void createActions();
-    void createMenus();
-
+    layout = new QHBoxLayout();
+        createWidgets();
+    createSettings();
+    createActions();
+    createMenus();
+    QWidget *widget = new QWidget;
+    widget->setLayout(layout);
+    setCentralWidget(widget);
 }
 
 PreviewViewer::~PreviewViewer()
@@ -31,11 +35,23 @@ void PreviewViewer::closeEvent(QCloseEvent *event)
 
 void PreviewViewer::createWidgets()
 {
-/////    imageWidget = new ImageWidget();
+    ImageWidget *imageWidget = new ImageWidget;
+    imageWidget->setImage("/file.jpeg");
+    imageWidget->setMinimumSize(800, 800);
+    imageWidget->setMaximumSize(800, 800);
+    QVBoxLayout* settings2Layout = new QVBoxLayout;
+    settings2Layout->addWidget(imageWidget);
+
+    QGroupBox* testBox = new QGroupBox;
+    testBox->setLayout(settings2Layout);
+    layout->addWidget(testBox);
+
 /////    setCentralWidget(imageWidget);
+
 
     // create ImageViewer widget
 /////    imageViewer = new ImageViewer();
+
 }
 
 void PreviewViewer::createActions()
@@ -48,7 +64,7 @@ void PreviewViewer::createActions()
 
     startCaptureAction = new QAction(tr("&StartCapture"), this);
     startCaptureAction -> setShortcut(tr("Ctrl+C"));
-    startCaptureAction -> setStatusTip(tr("Capture the photos"));    
+    startCaptureAction -> setStatusTip(tr("Capture the photos"));
     ///// connection to microscope here
 
 
@@ -73,7 +89,6 @@ void PreviewViewer::createActions()
     connect(exposureSpinBox, SIGNAL(valueChanged(int)), exposureSlider, SLOT(setValue(int)));
     connect(exposureSlider, SIGNAL(valueChanged(int)), exposureSpinBox, SLOT(setValue(int)));
 
-
 }
 
 void PreviewViewer::createMenus()
@@ -84,49 +99,49 @@ void PreviewViewer::createMenus()
     fileMenu -> addAction(openPastScansAction);
     fileMenu -> addSeparator();
     fileMenu -> addAction(exitAction);
-
     menuBar() -> addAction(toggleViewAction);
 }
 
 void PreviewViewer::createSettings()
 {
-    // settings
-
-    QGroupBox *magnificationGroupBox = new QGroupBox(tr("Lens/ Magnification"));
-    QLabel *magnificationLabel = new QLabel(tr("&Magnification"));
+//    // settings
+    rightLayout = new QVBoxLayout();
+    magnificationGroupBox = new QGroupBox(tr("Lens/Magnification"));
+    magnificationLabel = new QLabel(tr("&Magnification"));
     magnification = new QSpinBox;
     ///// magnification -> setRange(0, 300);
     magnificationLabel -> setBuddy(magnification);
-    QHBoxLayout *magLayout = new QHBoxLayout;
+    magLayout = new QHBoxLayout;
     magLayout -> addWidget(magnificationLabel);
     magLayout -> addWidget(magnification);
     magnificationGroupBox -> setLayout(magLayout);
+    magnificationGroupBox -> setMaximumSize(200, 100);
 
 
-    QGroupBox *settingsGroupBox = new QGroupBox(tr("Settings"));
-    ///// save location
+    settingsGroupBox = new QGroupBox(tr("Settings"));
+//    ///// save location
 
     autoFocus = new QCheckBox(tr("Auto Focus"));
     autoWhiteBalance = new QCheckBox(tr("Auto White Balance"));
 
-    QLabel *layerDepthLabel = new QLabel(tr("Layer depth"));
+    layerDepthLabel = new QLabel(tr("Layer depth"));
     layerDepth = new QSpinBox;
     ///// layerDepth -> setRange(i ,j);
     layerDepthLabel -> setBuddy(layerDepth);
 
-    QLabel *deltaZLabel = new QLabel(tr("∂z"));
+    deltaZLabel = new QLabel(tr("∂z"));
     deltaZ = new QSpinBox;
-    ///// deltaZ -> setRange(i, j)
+//    ///// deltaZ -> setRange(i, j)
     deltaZLabel -> setBuddy(deltaZ);
 
-    QLabel *exposureLabel = new QLabel(tr("Exposure"));
+    exposureLabel = new QLabel(tr("Exposure"));
     exposureSpinBox = new QSpinBox;
     ////// exposureSpinBox -> setRange(i, j);
     exposureLabel -> setBuddy(exposureSpinBox);
     exposureSlider = new QSlider(Qt::Horizontal);
     //////exposureSlider -> setRange(i, j);
 
-    QHBoxLayout *settingsLayout = new QHBoxLayout;
+    settingsLayout = new QHBoxLayout;
     settingsLayout -> addWidget(autoFocus);
     settingsLayout -> addWidget(autoWhiteBalance);
     settingsLayout -> addWidget(layerDepthLabel);
@@ -137,20 +152,28 @@ void PreviewViewer::createSettings()
     settingsLayout -> addWidget(exposureSpinBox);
     settingsLayout -> addWidget(exposureSlider);
     settingsGroupBox -> setLayout(settingsLayout);
-
+    settingsGroupBox->setFixedSize(500, 100);
     preview = new QPushButton(tr("Preview"));
     startCapture = new QPushButton(tr("Start capture"));
-    openPastScans = new QPushButton(tr("open past scans"));
+    openPastScans = new QPushButton(tr("Open Past Scans"));
 
 
-    QVBoxLayout *layout = new QVBoxLayout;
+
 /////    layout -> addWidget(imageWidget);
-    layout -> addWidget(magnificationGroupBox);
-    layout -> addWidget(settingsGroupBox);
-    layout -> addWidget(preview);
-    layout -> addWidget(startCapture);
-    layout -> addWidget(openPastScans);
+    rightLayout -> addWidget(magnificationGroupBox);
+    rightLayout -> addWidget(settingsGroupBox);
+    rightLayout -> addWidget(preview);
+    rightLayout -> addWidget(startCapture);
+    rightLayout -> addWidget(openPastScans);
+    layout->addLayout(rightLayout);
+    //QWidget *window = new QWidget;
+
+    //this->setLayout(layout);
+    //window->show();
+
 }
+
+
 
 
 
