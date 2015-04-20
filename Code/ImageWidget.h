@@ -14,6 +14,7 @@ class ImageWidget : public QWidget
     Q_OBJECT
 public:
     ImageWidget(QWidget *parent = 0);
+    QGraphicsPixmapItem *picture;
 
 private:
     void setupMatrix();
@@ -25,7 +26,7 @@ private:
     QSplitter *h2Splitter;
     QSlider *depthSlider;
     QStringList *inputList;
-    QGraphicsPixmapItem *picture;
+
 public slots:
     void Focus();
 
