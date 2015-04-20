@@ -5,14 +5,16 @@
 #include <QSplitter>
 #include <QPixmap>
 #include <QGraphicsPixmapItem>
+#include <QDir>
 
 
 ImageWidget::ImageWidget(QWidget *parent) : QWidget(parent)
 {
+    //picture = new QGraphicsPixmapItem();
     inputList = new QStringList();
-    inputList->append("/file.jpeg");
-    inputList->append("/download.jpeg");
-    inputList->append("/stuff2.jpg");
+    inputList->append(QDir::currentPath()+"/download.jpg"); //In main/Build right now. Path of executable.
+    inputList->append(QDir::currentPath()+"/file.jpeg");
+    inputList->append(QDir::currentPath()+"/stuff.jpg");
     populateScene();
     createDepthSlider();
     connect(depthSlider, SIGNAL(valueChanged(int)), this, SLOT(Focus()));
@@ -24,10 +26,9 @@ ImageWidget::ImageWidget(QWidget *parent) : QWidget(parent)
     vSplitter->setOrientation(Qt::Vertical);
     vSplitter->addWidget(h1Splitter);
     vSplitter->addWidget(h2Splitter);
-
     View *view = new View("Main view");
         view->view()->setScene(scene);
-        h1Splitter->addWidget(view);
+                h1Splitter->addWidget(view);
 
         QVBoxLayout *layout = new QVBoxLayout;
         layout->addWidget(vSplitter);
@@ -38,8 +39,9 @@ ImageWidget::ImageWidget(QWidget *parent) : QWidget(parent)
 void ImageWidget::populateScene()
 {
     scene = new QGraphicsScene;
-    QImage image("/file.jpeg");
+    QImage image(QDir::currentPath()+"/download.jpg");
     picture = scene->addPixmap(QPixmap::fromImage(image));
+
 }
 
 void ImageWidget::createDepthSlider()
@@ -55,8 +57,9 @@ void ImageWidget::createDepthSlider()
 void ImageWidget::Focus()
 {
     qDebug("testing");
-    QString blah = inputList->at(depthSlider->value());
+    QString blah = QDir::currentPath();
     qDebug(blah.toLatin1());
     QImage image(inputList->at(depthSlider->value()));
     picture->setPixmap(QPixmap::fromImage(image));
+    scene->update();
 }
