@@ -18,7 +18,7 @@ ImageWidget::ImageWidget(QWidget *parent) : QWidget(parent)
     vSplitter->addWidget(h1Splitter);
     vSplitter->addWidget(h2Splitter);
 
-    View *view = new View("Top left view");
+    View *view = new View("Main view");
         view->view()->setScene(scene);
         h1Splitter->addWidget(view);
 
