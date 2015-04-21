@@ -97,9 +97,7 @@ exposureSlider -> setRange(0, 99);
 
     
     QVBoxLayout *settingsLayout = new QVBoxLayout;
-//    settingsLayout -> addLayout(checkbox);
-    settingsLayout -> addWidget(autoFocus);
-    settingsLayout -> addWidget(autoWhiteBalance);
+    settingsLayout -> addLayout(checkbox);
     settingsLayout -> addLayout(depthLayout);
     settingsLayout -> addLayout(exposureLayout);
     settingsGroupBox -> setLayout(settingsLayout);
@@ -178,4 +176,5 @@ void PreviewViewer::createMenus()
      fileMenu -> addAction(exitAction);
 
 //     QMenu *viewMenu = menuBar() -> addMenu(tr("&View"));
+    menuBar() -> addAction(toggleViewAction);
 }

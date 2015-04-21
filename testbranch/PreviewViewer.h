@@ -62,6 +62,7 @@ private:
     QSlider *exposureSlider;
 
     // Widgets and variables
+    // ImageViewer *imageViewer;
 	ImageWidget *imageWidget;
     QString currFolder;
 
