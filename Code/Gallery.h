@@ -25,8 +25,9 @@ private slots:
     void changeImageDepth(int);
     
 private:
-    void createWidgets();
-    void createActions();
+
+    void setUpFileList(QStringList listOfFiles)
+    void showFiles();
 
     // Widgets and variables
     QString currFile;

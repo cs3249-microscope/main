@@ -9,7 +9,6 @@
 #include "Gallery.h"
 
 
-
 class ImageViewer: public QWidget
 {
     Q_OBJECT
