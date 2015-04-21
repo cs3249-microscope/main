@@ -9,8 +9,8 @@
 #include <QSpinBox>
 #include <QVBoxLayout>
 
-class QGraphicsScene;
-class QSplitter;
+#include<QGraphicsScene>
+#include <QSplitter>
 
 class ImageWidget : public QWidget
 {

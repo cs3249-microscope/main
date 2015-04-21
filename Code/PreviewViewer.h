@@ -12,12 +12,12 @@
 // #include "ImageViewer.h"
 
 // Class declaration without loading .h files. Faster compilation.
-class QAction;
-class QMenu;
-class QGroupBox;
-class QPushButton;
-class QCheckBox;
-class QPlainTextEdit;
+#include <QAction>
+#include <QMenu>
+#include <QGroupBox>
+#include <QPushButton>
+#include <QCheckBox>
+#include <QPlainTextEdit>
 
 
 class PreviewViewer: public QMainWindow

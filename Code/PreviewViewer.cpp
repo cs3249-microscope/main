@@ -2,6 +2,7 @@
 
 #include <QtGui>
 #include <QWidget>
+#include <QMenuBar>
 #include "PreviewViewer.h"
 
 // Constructor
