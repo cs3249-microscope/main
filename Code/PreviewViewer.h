@@ -32,6 +32,7 @@ protected:
     void closeEvent(QCloseEvent *event);
 
 private slots:
+    void changeExposure();
 
 private:
     void createWidgets();
@@ -43,6 +44,8 @@ private:
     QAction *openPastScansAction;
     QAction *exitAction;
     QAction *toggleViewAction;
+
+    QStringList *exposureList;
 
     QMenu *fileMenu;
 

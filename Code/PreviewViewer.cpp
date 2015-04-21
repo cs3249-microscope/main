@@ -3,12 +3,19 @@
 #include <QtGui>
 #include <QWidget>
 #include <QMenuBar>
+#include <QGraphicsPixmapItem>
 #include "PreviewViewer.h"
 
 // Constructor
 
 PreviewViewer::PreviewViewer()
 {
+    exposureList = new QStringList();
+    exposureList->append(QDir::currentPath()+"/PreviewExpo/expo1.png");
+    exposureList->append(QDir::currentPath()+"/PreviewExpo/expo2.png");
+    exposureList->append(QDir::currentPath()+"/PreviewExpo/expo3.png");
+    exposureList->append(QDir::currentPath()+"/PreviewExpo/expo4.png");
+    exposureList->append(QDir::currentPath()+"/PreviewExpo/expo5.png");
     createWidgets();
     createActions();
     createMenus();
@@ -84,9 +91,9 @@ void PreviewViewer::createWidgets()
 
     QLabel *exposureLabel = new QLabel(tr("Exposure"));
     exposureSpinBox = new QSpinBox;
-exposureSpinBox -> setRange(0, 99);
+exposureSpinBox -> setRange(0, 4);
     exposureSlider = new QSlider(Qt::Horizontal);
-exposureSlider -> setRange(0, 99);
+exposureSlider -> setRange(0, 4);
 
     QHBoxLayout *exposureLabelSpinBox = new QHBoxLayout;
     exposureLabelSpinBox -> addWidget(exposureLabel);
@@ -165,6 +172,7 @@ void PreviewViewer::createActions()
 //     // Other connections
      connect(exposureSpinBox, SIGNAL(valueChanged(int)), exposureSlider, SLOT(setValue(int)));
      connect(exposureSlider, SIGNAL(valueChanged(int)), exposureSpinBox, SLOT(setValue(int)));
+     connect(exposureSlider, SIGNAL(valueChanged(int)), this, SLOT(changeExposure()));
 //
 
 }
@@ -178,5 +186,13 @@ void PreviewViewer::createMenus()
      fileMenu -> addSeparator();
      fileMenu -> addAction(exitAction);
 
+
 //     QMenu *viewMenu = menuBar() -> addMenu(tr("&View"));
+}
+
+void PreviewViewer::changeExposure()
+{
+    QImage image(exposureList->at(exposureSlider->value()));
+    imageWidget->picture->setPixmap(QPixmap::fromImage(image));
+
 }
