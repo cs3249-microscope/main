@@ -41,13 +41,13 @@ View::View(const QString &name, QWidget *parent)
     zoomInIcon->setAutoRepeat(true);
     zoomInIcon->setAutoRepeatInterval(33);
     zoomInIcon->setAutoRepeatDelay(0);
-    zoomInIcon->setIcon(QPixmap(":/zoomin.png"));
+    zoomInIcon->setIcon(QPixmap(QDir::currentPath()+"/icons/zoomin.png"));
     zoomInIcon->setIconSize(iconSize);
     QToolButton *zoomOutIcon = new QToolButton;
     zoomOutIcon->setAutoRepeat(true);
     zoomOutIcon->setAutoRepeatInterval(33);
     zoomOutIcon->setAutoRepeatDelay(0);
-    zoomOutIcon->setIcon(QPixmap(":/zoomout.png"));
+    zoomOutIcon->setIcon(QPixmap(QDir::currentPath()+"/icons/zoomout.png"));
     zoomOutIcon->setIconSize(iconSize);
     zoomSlider = new QSlider;
     zoomSlider->setMinimum(0);
@@ -62,10 +62,10 @@ View::View(const QString &name, QWidget *parent)
     zoomSliderLayout->addWidget(zoomOutIcon);
 
     QToolButton *rotateLeftIcon = new QToolButton;
-    rotateLeftIcon->setIcon(QPixmap(":/rotateleft.png"));
+    rotateLeftIcon->setIcon(QPixmap(QDir::currentPath()+"/icons/rotateleft.png"));
     rotateLeftIcon->setIconSize(iconSize);
     QToolButton *rotateRightIcon = new QToolButton;
-    rotateRightIcon->setIcon(QPixmap(":/rotateright.png"));
+    rotateRightIcon->setIcon(QPixmap(QDir::currentPath()+"/icons/rotateright.png"));
     rotateRightIcon->setIconSize(iconSize);
     rotateSlider = new QSlider;
     rotateSlider->setOrientation(Qt::Horizontal);
@@ -89,7 +89,7 @@ View::View(const QString &name, QWidget *parent)
     label = new QLabel(name);
 
     printButton = new QToolButton;
-    printButton->setIcon(QIcon(QPixmap(":/fileprint.png")));
+    printButton->setIcon(QIcon(QPixmap(QDir::currentPath()+"/icons/fileprint.png")));
 
 
     labelLayout->addWidget(label);
