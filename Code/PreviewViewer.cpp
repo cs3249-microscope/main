@@ -122,7 +122,6 @@ void PreviewViewer::createSettings()
 
     settingsGroupBox = new QGroupBox(tr("Settings"));
 //    ///// save location
-    imageGroupBox = new QGroupBox("Image settings");
     autoFocus = new QCheckBox(tr("Auto Focus"));
     autoWhiteBalance = new QCheckBox(tr("Auto White Balance"));
 

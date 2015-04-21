@@ -16,7 +16,7 @@ class ImageWidget : public QWidget
     Q_OBJECT
 public:
     ImageWidget(QWidget *parent = 0);
-    QGraphicsPixmapItem *picture;
+    QGraphicsPixmapItem *picture; //Modify this with setPixmap anywhere to change picture. Ideally put QInputList object here in public as well.
 
 private:
     void setupMatrix();

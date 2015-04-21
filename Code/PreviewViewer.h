@@ -47,7 +47,6 @@ private:
 
     QGroupBox *magnificationGroupBox;
     QGroupBox *settingsGroupBox;
-    QGroupBox *imageGroupBox;
 
     QLabel *layerDepthLabel;
     QLabel *deltaZLabel;
@@ -61,8 +60,6 @@ private:
     QVBoxLayout *layersLayout;
     QVBoxLayout *checkBoxLayout;
     QVBoxLayout *exposureLayout;
-    QHBoxLayout *bottomLeftTopLayout;
-    QHBoxLayout *bottomLeftBottomLayout;
 
     QVBoxLayout *rightLayout;
     QVBoxLayout *leftLayout;
