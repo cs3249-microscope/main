@@ -51,7 +51,8 @@ private:
     QToolButton *printButton;
     QToolButton *resetButton;
     QSlider *zoomSlider;
-    QSlider *depthSlider;
+    QSlider *rotateSlider;
+
 };
 
 #endif // VIEW_H

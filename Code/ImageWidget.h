@@ -5,6 +5,8 @@
 #include <QSlider>
 #include <QPixmap>
 #include <QGraphicsScene>
+#include <QLabel>
+#include <QSpinBox>
 
 class QGraphicsScene;
 class QSplitter;

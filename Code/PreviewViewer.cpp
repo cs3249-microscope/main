@@ -9,10 +9,14 @@
 PreviewViewer::PreviewViewer()
 {
     layout = new QHBoxLayout();
+    leftLayout = new QVBoxLayout();
     createWidgets();
     createSettings();
     createActions();
     createMenus();
+    leftLayout->addWidget(imageGroupBox);
+    layout->addLayout(leftLayout);
+    layout->addLayout(rightLayout);
     QWidget *widget = new QWidget;
     widget->setLayout(layout);
     setCentralWidget(widget);
@@ -42,7 +46,7 @@ void PreviewViewer::createWidgets()
     QGroupBox* testBox = new QGroupBox;
     testBox->setLayout(settings2Layout);
     testBox->setMinimumSize(800, 800);
-    layout->addWidget(imageWidget);
+    leftLayout->addWidget(imageWidget);
 
 /////    setCentralWidget(imageWidget);
 
@@ -118,7 +122,7 @@ void PreviewViewer::createSettings()
 
     settingsGroupBox = new QGroupBox(tr("Settings"));
 //    ///// save location
-
+    imageGroupBox = new QGroupBox("Image settings");
     autoFocus = new QCheckBox(tr("Auto Focus"));
     autoWhiteBalance = new QCheckBox(tr("Auto White Balance"));
 
@@ -139,18 +143,25 @@ void PreviewViewer::createSettings()
     exposureSlider = new QSlider(Qt::Horizontal);
     //////exposureSlider -> setRange(i, j);
 
+
     settingsLayout = new QHBoxLayout;
-    settingsLayout -> addWidget(autoFocus);
-    settingsLayout -> addWidget(autoWhiteBalance);
-    settingsLayout -> addWidget(layerDepthLabel);
-    settingsLayout -> addWidget(layerDepth);
-    settingsLayout -> addWidget(deltaZLabel);
-    settingsLayout -> addWidget(deltaZ);
-    settingsLayout -> addWidget(exposureLabel);
-    settingsLayout -> addWidget(exposureSpinBox);
-    settingsLayout -> addWidget(exposureSlider);
+    bottomLeftTopLayout = new QHBoxLayout;
+    bottomLeftBottomLayout = new QHBoxLayout;
+    bottomLeftTopLayout -> addWidget(layerDepthLabel);
+    bottomLeftTopLayout -> addWidget(layerDepth);
+    bottomLeftTopLayout -> addWidget(autoFocus);
+    bottomLeftTopLayout -> addWidget(exposureLabel);
+    bottomLeftTopLayout -> addWidget(exposureSpinBox);
+    bottomLeftBottomLayout->addWidget(deltaZLabel);
+    bottomLeftBottomLayout->addWidget(deltaZ);
+    bottomLeftBottomLayout -> addWidget(autoWhiteBalance);
+    bottomLeftBottomLayout->addWidget(exposureSlider);
+    bottomLeftLayout = new QVBoxLayout;
+    bottomLeftLayout -> addLayout(bottomLeftTopLayout);
+    bottomLeftLayout -> addLayout(bottomLeftBottomLayout);
+    imageGroupBox -> setLayout(bottomLeftLayout);
     settingsGroupBox -> setLayout(settingsLayout);
-    settingsGroupBox->setFixedSize(500, 100);
+    settingsGroupBox->setFixedSize(200, 100);
     preview = new QPushButton(tr("Preview"));
     startCapture = new QPushButton(tr("Start capture"));
     openPastScans = new QPushButton(tr("Open Past Scans"));
@@ -163,11 +174,6 @@ void PreviewViewer::createSettings()
     rightLayout -> addWidget(preview);
     rightLayout -> addWidget(startCapture);
     rightLayout -> addWidget(openPastScans);
-    layout->addLayout(rightLayout);
-    //QWidget *window = new QWidget;
-
-    //this->setLayout(layout);
-    //window->show();
 
 }
 

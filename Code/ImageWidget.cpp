@@ -56,9 +56,6 @@ void ImageWidget::createDepthSlider()
 
 void ImageWidget::Focus()
 {
-    qDebug("testing");
-    QString blah = QDir::currentPath();
-    qDebug(blah.toLatin1());
     QImage image(inputList->at(depthSlider->value()));
     picture->setPixmap(QPixmap::fromImage(image));
     scene->update();
