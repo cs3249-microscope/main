@@ -23,7 +23,7 @@ public:
     
 signals:
     void imageDepthChanged(int);
-    
+
 private:
     void setupMatrix();
     void createDepthSlider();
@@ -38,7 +38,7 @@ private:
     QLabel *depthSliderLabel;
 
 public slots:
-    void Focus();
+    void Focus(int);
     void changeImageDepth(int);
 };
 
