@@ -31,6 +31,8 @@ private:
     QSlider *depthSlider;
     QStringList *depthList;
     QVBoxLayout *layout;
+    QHBoxLayout *depthLayout;
+    QLabel *depthSliderLabel;
 
 public slots:
     void Focus();

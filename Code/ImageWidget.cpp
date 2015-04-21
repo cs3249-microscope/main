@@ -29,14 +29,14 @@ ImageWidget::ImageWidget(QWidget *parent) : QWidget(parent)
     QSplitter *vSplitter = new QSplitter;
     vSplitter->setOrientation(Qt::Vertical);
     vSplitter->addWidget(h1Splitter);
-    vSplitter->addWidget(h2Splitter);
+    //vSplitter->addWidget(h2Splitter);
     View *view = new View("Main view");
         view->view()->setScene(scene);
         h1Splitter->addWidget(view);
 
         layout = new QVBoxLayout;
         layout->addWidget(vSplitter);
-        layout->addWidget(depthSlider);
+        layout->addLayout(depthLayout);
         setLayout(layout);
 }
 
@@ -49,12 +49,16 @@ void ImageWidget::populateScene()
 
 void ImageWidget::createDepthSlider()
 {
+    depthLayout = new QHBoxLayout();
+    depthSliderLabel = new QLabel(tr("Depth"));
     depthSlider = new QSlider;
     depthSlider->setOrientation(Qt::Horizontal);
     depthSlider->setMinimum(0);
     depthSlider->setMaximum(4);
     depthSlider->setValue(0);
     depthSlider->setTickPosition(QSlider::TicksBelow);
+    depthLayout->addWidget(depthSliderLabel);
+    depthLayout->addWidget(depthSlider);
 }
 
 void ImageWidget::Focus()

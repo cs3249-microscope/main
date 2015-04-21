@@ -41,6 +41,7 @@ PreviewViewer::~PreviewViewer()
 
 void PreviewViewer::closeEvent(QCloseEvent *event)
 {
+    if(imageViewer)
     imageViewer->close();
 }
 
@@ -193,7 +194,7 @@ void PreviewViewer::createMenus()
 
 
 //     QMenu *viewMenu = menuBar() -> addMenu(tr("&View"));
-    menuBar() -> addAction(toggleViewAction);
+   // menuBar() -> addAction(toggleViewAction);
 }
 
 void PreviewViewer::changeExposure()
