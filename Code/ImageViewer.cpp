@@ -10,6 +10,7 @@ ImageViewer::ImageViewer(QString folderName)
     currFolder = folderName;
     
     imageWidget = new ImageWidget;
+    imageWidget->populateScene();
     gallery = new Gallery(folderName);
     
     QVBoxLayout *layout = new QVBoxLayout;
