@@ -2,12 +2,29 @@
 
 #include <QtGui>
 #include <QWidget>
+#include <QMenuBar>
+#include <QGraphicsPixmapItem>
+#include <QFileDialog>
 #include "PreviewViewer.h"
+#include "ImageViewer.h"
 
 // Constructor
 
 PreviewViewer::PreviewViewer()
 {
+    exposureList = new QStringList();
+    exposureList->append(QDir::currentPath()+"/PreviewExpo/expo1.png");
+    exposureList->append(QDir::currentPath()+"/PreviewExpo/expo2.png");
+    exposureList->append(QDir::currentPath()+"/PreviewExpo/expo3.png");
+    exposureList->append(QDir::currentPath()+"/PreviewExpo/expo4.png");
+    exposureList->append(QDir::currentPath()+"/PreviewExpo/expo5.png");
+
+    magList = new QStringList();
+    magList->append(QDir::currentPath()+"/Mag/mag0.png");
+    magList->append(QDir::currentPath()+"/Mag/mag1.png");
+    magList->append(QDir::currentPath()+"/Mag/mag2.png");
+    magList->append(QDir::currentPath()+"/Mag/mag3.png");
+
     createWidgets();
     createActions();
     createMenus();
@@ -24,7 +41,8 @@ PreviewViewer::~PreviewViewer()
 
 void PreviewViewer::closeEvent(QCloseEvent *event)
 {
-/////    imageViewer->close();
+    if(imageViewer)
+    imageViewer->close();
 }
 
 // Create widgets, actions, menus.
@@ -35,17 +53,12 @@ void PreviewViewer::createWidgets()
 	
     imageWidget = new ImageWidget;
 
-
-    // create ImageViewer widget
-/////    imageViewer = new ImageViewer();
-
-
     // settings
 
     QGroupBox *magnificationGroupBox = new QGroupBox(tr("Lens/ Magnification"));
     QLabel *magnificationLabel = new QLabel(tr("&Magnification"));
     magnification = new QSpinBox;
-    ///// magnification -> setRange(0, 300);
+    magnification->setRange(1,4);
     magnificationLabel -> setBuddy(magnification);
     
     QHBoxLayout *magLayout = new QHBoxLayout;
@@ -60,10 +73,6 @@ void PreviewViewer::createWidgets()
 
     autoFocus = new QCheckBox(tr("Auto Focus"));
     autoWhiteBalance = new QCheckBox(tr("Auto White Balance"));
-    
-	QHBoxLayout *checkbox = new QHBoxLayout;
-	checkbox -> addWidget(autoFocus);
-	checkbox -> addWidget(autoWhiteBalance);
 
     
     QLabel *layerDepthLabel = new QLabel(tr("Layer depth"));
@@ -83,9 +92,9 @@ void PreviewViewer::createWidgets()
 
     QLabel *exposureLabel = new QLabel(tr("Exposure"));
     exposureSpinBox = new QSpinBox;
-exposureSpinBox -> setRange(0, 99);
+exposureSpinBox -> setRange(0, 4);
     exposureSlider = new QSlider(Qt::Horizontal);
-exposureSlider -> setRange(0, 99);
+exposureSlider -> setRange(0, 4);
 
     QHBoxLayout *exposureLabelSpinBox = new QHBoxLayout;
     exposureLabelSpinBox -> addWidget(exposureLabel);
@@ -97,7 +106,6 @@ exposureSlider -> setRange(0, 99);
 
     
     QVBoxLayout *settingsLayout = new QVBoxLayout;
-//    settingsLayout -> addLayout(checkbox);
     settingsLayout -> addWidget(autoFocus);
     settingsLayout -> addWidget(autoWhiteBalance);
     settingsLayout -> addLayout(depthLayout);
@@ -107,7 +115,7 @@ exposureSlider -> setRange(0, 99);
 
     preview = new QPushButton(tr("Preview"));
     startCapture = new QPushButton(tr("Start capture"));
-    openPastScans = new QPushButton(tr("Open past scans"));
+    openPastScansButton = new QPushButton(tr("Open past scans"));
 
 
 	QVBoxLayout *vlayout = new QVBoxLayout;
@@ -115,7 +123,7 @@ exposureSlider -> setRange(0, 99);
     vlayout -> addWidget(settingsGroupBox);
     vlayout -> addWidget(preview);
     vlayout -> addWidget(startCapture);
-    vlayout -> addWidget(openPastScans);
+    vlayout -> addWidget(openPastScansButton);
 
 
     QHBoxLayout *layout = new QHBoxLayout;
@@ -136,6 +144,8 @@ void PreviewViewer::createActions()
      previewAction = new QAction(tr("&Preview"), this);
      previewAction -> setShortcut(tr("Ctrl+P"));
      previewAction -> setStatusTip(tr("Set to start preview"));
+     connect(previewAction, SIGNAL(triggered()), this, SLOT(startPreview()));
+     connect(preview, SIGNAL(clicked()),this,SLOT(startPreview()));
 //     ///// connection to microscope here
 // 
      startCaptureAction = new QAction(tr("&StartCapture"), this);
@@ -147,8 +157,9 @@ void PreviewViewer::createActions()
      openPastScansAction = new QAction(tr("&OpenPastScans"), this);
      openPastScansAction -> setShortcut(tr("Ctrl+O"));
      openPastScansAction -> setStatusTip(tr("See previous scans"));
-// /////    connect(openPastScansAction, SIGNAL(triggered()), imageViewer, SLOT(show()));
-// 
+     connect(openPastScansAction, SIGNAL(triggered()), this, SLOT(openPastScans()));
+    connect(openPastScansButton, SIGNAL(clicked()), this, SLOT(openPastScans()));
+//
 // 
      exitAction = new QAction(tr("&Exit"), this);
      exitAction -> setShortcut(tr("Ctrl+Q"));
@@ -164,6 +175,10 @@ void PreviewViewer::createActions()
 //     // Other connections
      connect(exposureSpinBox, SIGNAL(valueChanged(int)), exposureSlider, SLOT(setValue(int)));
      connect(exposureSlider, SIGNAL(valueChanged(int)), exposureSpinBox, SLOT(setValue(int)));
+     connect(exposureSlider, SIGNAL(valueChanged(int)), this, SLOT(changeExposure()));
+     connect(autoFocus, SIGNAL(stateChanged(int)),this,SLOT(sharpen()));
+     connect(autoWhiteBalance, SIGNAL(stateChanged(int)),this,SLOT(wBalance()));
+     connect(magnification, SIGNAL(valueChanged(int)),this,SLOT(magnify()));
 //
 
 }
@@ -177,5 +192,68 @@ void PreviewViewer::createMenus()
      fileMenu -> addSeparator();
      fileMenu -> addAction(exitAction);
 
+
 //     QMenu *viewMenu = menuBar() -> addMenu(tr("&View"));
+   // menuBar() -> addAction(toggleViewAction);
 }
+
+void PreviewViewer::changeExposure()
+{
+    QImage image(exposureList->at(exposureSlider->value()));
+    imageWidget->picture->setPixmap(QPixmap::fromImage(image));
+
+}
+
+void PreviewViewer::sharpen()
+{
+    if(autoFocus->isChecked())
+    {
+        QImage image(QDir::currentPath()+"/Sharpen/sharp1.png");
+        imageWidget->picture->setPixmap(QPixmap::fromImage(image));
+    }
+    else
+    {
+        QImage image(QDir::currentPath()+"/Sharpen/sharp0.png");
+        imageWidget->picture->setPixmap(QPixmap::fromImage(image));
+    }
+}
+
+void PreviewViewer::magnify()
+{
+    QImage image(magList->at(magnification->value()-1));
+    imageWidget->picture->setPixmap(QPixmap::fromImage(image));
+}
+
+void PreviewViewer::startPreview()
+{
+    imageWidget->populateScene();
+}
+
+void PreviewViewer::openPastScans()
+{
+    QString fileName = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
+                                                         ".",
+                                                         QFileDialog::ShowDirsOnly |
+                                                         QFileDialog::DontResolveSymlinks);
+
+    if (QDir(fileName).exists()) {
+        imageViewer = new ImageViewer(fileName);
+        imageViewer -> show();
+    } else {
+    }
+}
+
+void PreviewViewer::wBalance()
+{
+    if(autoWhiteBalance->isChecked())
+    {
+        QImage image(QDir::currentPath()+"/WhiteBalance/wBalance1.png");
+        imageWidget->picture->setPixmap(QPixmap::fromImage(image));
+    }
+    else
+    {
+        QImage image(QDir::currentPath()+"/WhiteBalance/wBalance0.png");
+        imageWidget->picture->setPixmap(QPixmap::fromImage(image));
+    }
+}
+

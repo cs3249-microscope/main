@@ -1,0 +1,13 @@
+INPUT(
+./release/main.o
+./release/ImageWidget.o
+./release/PreviewViewer.o
+./release/view.o
+./release/ImageViewer.o
+./release/Gallery.o
+./release/moc_ImageWidget.o
+./release/moc_PreviewViewer.o
+./release/moc_view.o
+./release/moc_ImageViewer.o
+./release/moc_Gallery.o
+);

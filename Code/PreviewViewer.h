@@ -9,15 +9,15 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include "ImageWidget.h"
-// #include "ImageViewer.h"
+#include "ImageViewer.h"
 
 // Class declaration without loading .h files. Faster compilation.
-class QAction;
-class QMenu;
-class QGroupBox;
-class QPushButton;
-class QCheckBox;
-class QPlainTextEdit;
+#include <QAction>
+#include <QMenu>
+#include <QGroupBox>
+#include <QPushButton>
+#include <QCheckBox>
+#include <QPlainTextEdit>
 
 
 class PreviewViewer: public QMainWindow
@@ -32,6 +32,12 @@ protected:
     void closeEvent(QCloseEvent *event);
 
 private slots:
+    void changeExposure();
+    void sharpen();
+    void magnify();
+    void wBalance();
+    void openPastScans();
+    void startPreview();
 
 private:
     void createWidgets();
@@ -44,12 +50,15 @@ private:
     QAction *exitAction;
     QAction *toggleViewAction;
 
+    QStringList *exposureList;
+    QStringList *magList;
+
     QMenu *fileMenu;
 
     // settings
     QPushButton *preview;
     QPushButton *startCapture;
-    QPushButton *openPastScans;
+    QPushButton *openPastScansButton;
 
     QCheckBox *autoFocus;
     QCheckBox *autoWhiteBalance;
@@ -62,7 +71,8 @@ private:
     QSlider *exposureSlider;
 
     // Widgets and variables
-	ImageWidget *imageWidget;
+    ImageViewer *imageViewer;
+    ImageWidget *imageWidget;
     QString currFolder;
 
 };
