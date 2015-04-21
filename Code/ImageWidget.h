@@ -21,6 +21,8 @@ public:
     void toggleSplitView(QWidget *widget, bool toggledOn);
     void populateScene();
 
+signals:
+	void imageDepthChanged(int);
 private:
     void setupMatrix();
     void createDepthSlider();
@@ -35,7 +37,7 @@ private:
     QLabel *depthSliderLabel;
 
 public slots:
-    void Focus();
+    void Focus(int);
 
 };
 

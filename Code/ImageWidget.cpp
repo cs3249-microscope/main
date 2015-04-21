@@ -21,7 +21,7 @@ ImageWidget::ImageWidget(QWidget *parent) : QWidget(parent)
     QImage image(QDir::currentPath()+"/blank.png");
     picture = scene->addPixmap(QPixmap::fromImage(image));
     createDepthSlider();
-    connect(depthSlider, SIGNAL(valueChanged(int)), this, SLOT(Focus()));
+    connect(depthSlider, SIGNAL(valueChanged(int)), this, SLOT(Focus(int)));
 
     h1Splitter = new QSplitter;
     h2Splitter = new QSplitter;
@@ -61,9 +61,9 @@ void ImageWidget::createDepthSlider()
     depthLayout->addWidget(depthSlider);
 }
 
-void ImageWidget::Focus()
+void ImageWidget::Focus(int newDepth)
 {
-    QImage image(depthList->at(depthSlider->value()));
+    QImage image(depthList->at(newDepth));
     picture->setPixmap(QPixmap::fromImage(image));
     scene->update();
 }
