@@ -33,6 +33,7 @@ protected:
 
 private slots:
     void changeExposure();
+    void sharpen();
 
 private:
     void createWidgets();

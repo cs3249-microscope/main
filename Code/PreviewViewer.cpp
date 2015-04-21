@@ -173,6 +173,7 @@ void PreviewViewer::createActions()
      connect(exposureSpinBox, SIGNAL(valueChanged(int)), exposureSlider, SLOT(setValue(int)));
      connect(exposureSlider, SIGNAL(valueChanged(int)), exposureSpinBox, SLOT(setValue(int)));
      connect(exposureSlider, SIGNAL(valueChanged(int)), this, SLOT(changeExposure()));
+     connect(autoFocus, SIGNAL(stateChanged(int)),this,SLOT(sharpen()));
 //
 
 }
@@ -195,4 +196,18 @@ void PreviewViewer::changeExposure()
     QImage image(exposureList->at(exposureSlider->value()));
     imageWidget->picture->setPixmap(QPixmap::fromImage(image));
 
+}
+
+void PreviewViewer::sharpen()
+{
+    if(autoFocus->isChecked())
+    {
+        QImage image(QDir::currentPath()+"/Sharpen/sharp1.png");
+        imageWidget->picture->setPixmap(QPixmap::fromImage(image));
+    }
+    else
+    {
+        QImage image(QDir::currentPath()+"/Sharpen/sharp0.png");
+        imageWidget->picture->setPixmap(QPixmap::fromImage(image));
+    }
 }
