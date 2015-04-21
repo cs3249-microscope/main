@@ -6,6 +6,7 @@
 #include <QWidget>
 #include <QGridLayout>
 #include <QLabel>
+#include <QListWidgetItem>
 
 // class declaration
 class QImage;
@@ -24,7 +25,9 @@ signals:
     void imageDepthChanged(int);
     
 private slots:
+    void changeImageDepth(QListWidgetItem *, QListWidgetItem *);
     void changeImageDepth(int);
+    
     
 private:
 
@@ -32,6 +35,8 @@ private:
     void showFiles();
 
     // Widgets and variables
+
+    QList<QListWidgetItem *> widgetItemList;
 
     QVector<QImage> fileList;
     int currentImageDepth;
