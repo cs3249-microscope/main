@@ -17,7 +17,9 @@ ImageWidget::ImageWidget(QWidget *parent) : QWidget(parent)
     depthList->append(QDir::currentPath()+"/PreviewDepth/layer3.png");
     depthList->append(QDir::currentPath()+"/PreviewDepth/layer4.png");
     depthList->append(QDir::currentPath()+"/PreviewDepth/layer5.png");
-    populateScene();
+    scene = new QGraphicsScene;
+    QImage image(QDir::currentPath()+"/blank.png");
+    picture = scene->addPixmap(QPixmap::fromImage(image));
     createDepthSlider();
     connect(depthSlider, SIGNAL(valueChanged(int)), this, SLOT(Focus()));
 
@@ -42,7 +44,7 @@ void ImageWidget::populateScene()
 {
     scene = new QGraphicsScene;
     QImage image(QDir::currentPath()+"/PreviewDepth/layer1.png");
-    picture = scene->addPixmap(QPixmap::fromImage(image));
+    picture->setPixmap(QPixmap::fromImage(image));
 }
 
 void ImageWidget::createDepthSlider()

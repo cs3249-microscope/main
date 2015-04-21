@@ -37,6 +37,7 @@ private slots:
     void magnify();
     void wBalance();
     void openPastScans();
+    void startPreview();
 
 private:
     void createWidgets();

@@ -143,6 +143,8 @@ void PreviewViewer::createActions()
      previewAction = new QAction(tr("&Preview"), this);
      previewAction -> setShortcut(tr("Ctrl+P"));
      previewAction -> setStatusTip(tr("Set to start preview"));
+     connect(previewAction, SIGNAL(triggered()), this, SLOT(startPreview()));
+     connect(preview, SIGNAL(clicked()),this,SLOT(startPreview()));
 //     ///// connection to microscope here
 // 
      startCaptureAction = new QAction(tr("&StartCapture"), this);
@@ -219,6 +221,11 @@ void PreviewViewer::magnify()
 {
     QImage image(magList->at(magnification->value()-1));
     imageWidget->picture->setPixmap(QPixmap::fromImage(image));
+}
+
+void PreviewViewer::startPreview()
+{
+    imageWidget->populateScene();
 }
 
 void PreviewViewer::openPastScans()
