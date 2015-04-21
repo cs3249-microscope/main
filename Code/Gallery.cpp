@@ -173,4 +173,5 @@ void Gallery::changeImageDepth(int depth) {
     
     emit imageDepthChanged(depth);
 }
+}
 
