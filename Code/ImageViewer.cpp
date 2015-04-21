@@ -26,6 +26,6 @@ void ImageViewer::createConnections()
             gallery, SLOT(changeImageDepth(int)));
     
     connect(gallery, SIGNAL(imageDepthChanged(int)),
-            imageWidget, SLOT(changeImageDepth(int)));
+            imageWidget, SLOT(Focus(int)));
 
 }
