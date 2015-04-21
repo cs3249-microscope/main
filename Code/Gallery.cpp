@@ -103,6 +103,7 @@ void Gallery::showFiles() {
     listWidget -> addItem("pic2");
     listWidget -> addItem("pic3");
     listWidget -> addItem("pic4");
+    listWidget -> addItem("pic5");
     
     
     
@@ -144,13 +145,14 @@ void Gallery::changeImageDepth(QListWidgetItem *curr, QListWidgetItem *prev) {
 
 void Gallery::changeImageDepth(int depth) {
     
-    //    if (currentImageDepth != depth) {
-    //        currentImageDepth = depth;
-    //        QImage currFile = fileList.at(depth);
-    //
-    //        //// change the active selection indication here.
-    //
-    //
+        if (currentImageDepth != depth) {
+            currentImageDepth = depth;
+//            QImage currFile = fileList.at(depth);
+            
+    
+            //// change the active selection indication here.
+    
+    
     
     
     
