@@ -1,0 +1,13 @@
+INPUT(
+./debug/main.o
+./debug/ImageWidget.o
+./debug/PreviewViewer.o
+./debug/view.o
+./debug/ImageViewer.o
+./debug/Gallery.o
+./debug/moc_ImageWidget.o
+./debug/moc_PreviewViewer.o
+./debug/moc_view.o
+./debug/moc_ImageViewer.o
+./debug/moc_Gallery.o
+);

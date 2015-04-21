@@ -4,6 +4,8 @@
 #define Gallery_H
 
 #include <QWidget>
+#include <QGridLayout>
+#include <QLabel>
 
 // class declaration
 class QImage;

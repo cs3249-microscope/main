@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QMenuBar>
 #include <QGraphicsPixmapItem>
+#include <QFileDialog>
 #include "PreviewViewer.h"
 #include "ImageViewer.h"
 

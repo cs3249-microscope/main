@@ -18,7 +18,11 @@ INCLUDEPATH += .
 # Input
 HEADERS += ImageWidget.h \
     PreviewViewer.h \
-    view.h
+    view.h \
+    ImageViewer.h \
+    Gallery.h
 SOURCES +=  main.cpp ImageWidget.cpp\
     PreviewViewer.cpp \
-    view.cpp
+    view.cpp \
+    ImageViewer.cpp \
+    Gallery.cpp
