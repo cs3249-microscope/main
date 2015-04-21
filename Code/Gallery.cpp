@@ -98,6 +98,7 @@ void Gallery::showFiles() {
     listWidget -> setViewMode(QListWidget::IconMode);
     listWidget -> setResizeMode(QListWidget::Adjust);
     listWidget -> setSelectionMode(QAbstractItemView::SingleSelection);
+
     listWidget -> setMaximumSize(800, 40);
     QListWidgetItem *itm  = new QListWidgetItem();
     itm->setIcon(QIcon(QDir::currentPath()+"/thumbnails/t1.png"));
@@ -114,6 +115,7 @@ void Gallery::showFiles() {
     itm  = new QListWidgetItem();
     itm->setIcon(QIcon(QDir::currentPath()+"/thumbnails/t5.png"));
     listWidget -> addItem(itm);
+
     
     
     
@@ -158,13 +160,14 @@ void Gallery::changeImageDepth(QListWidgetItem *curr, QListWidgetItem *prev) {
 
 void Gallery::changeImageDepth(int depth) {
     
-    //    if (currentImageDepth != depth) {
-    //        currentImageDepth = depth;
-    //        QImage currFile = fileList.at(depth);
-    //
-    //        //// change the active selection indication here.
-    //
-    //
+        if (currentImageDepth != depth) {
+            currentImageDepth = depth;
+//            QImage currFile = fileList.at(depth);
+            
+    
+            //// change the active selection indication here.
+    
+    
     
     
     
