@@ -57,12 +57,15 @@ private:
     QHBoxLayout *magLayout;
     QHBoxLayout *settingsLayout;
     QHBoxLayout *layout;
+    QHBoxLayout *bottomLeftLayout;
+    QVBoxLayout *layersLayout;
+    QVBoxLayout *checkBoxLayout;
+    QVBoxLayout *exposureLayout;
     QHBoxLayout *bottomLeftTopLayout;
     QHBoxLayout *bottomLeftBottomLayout;
 
     QVBoxLayout *rightLayout;
     QVBoxLayout *leftLayout;
-    QVBoxLayout *bottomLeftLayout;
 
     QPushButton *preview;
     QPushButton *startCapture;

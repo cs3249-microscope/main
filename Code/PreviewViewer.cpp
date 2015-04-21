@@ -14,7 +14,7 @@ PreviewViewer::PreviewViewer()
     createSettings();
     createActions();
     createMenus();
-    leftLayout->addWidget(imageGroupBox);
+    leftLayout->addLayout(bottomLeftLayout);
     layout->addLayout(leftLayout);
     layout->addLayout(rightLayout);
     QWidget *widget = new QWidget;
@@ -145,21 +145,23 @@ void PreviewViewer::createSettings()
 
 
     settingsLayout = new QHBoxLayout;
-    bottomLeftTopLayout = new QHBoxLayout;
-    bottomLeftBottomLayout = new QHBoxLayout;
-    bottomLeftTopLayout -> addWidget(layerDepthLabel);
-    bottomLeftTopLayout -> addWidget(layerDepth);
-    bottomLeftTopLayout -> addWidget(autoFocus);
-    bottomLeftTopLayout -> addWidget(exposureLabel);
-    bottomLeftTopLayout -> addWidget(exposureSpinBox);
-    bottomLeftBottomLayout->addWidget(deltaZLabel);
-    bottomLeftBottomLayout->addWidget(deltaZ);
-    bottomLeftBottomLayout -> addWidget(autoWhiteBalance);
-    bottomLeftBottomLayout->addWidget(exposureSlider);
-    bottomLeftLayout = new QVBoxLayout;
-    bottomLeftLayout -> addLayout(bottomLeftTopLayout);
-    bottomLeftLayout -> addLayout(bottomLeftBottomLayout);
-    imageGroupBox -> setLayout(bottomLeftLayout);
+    layersLayout = new QVBoxLayout;
+    checkBoxLayout = new QVBoxLayout;
+    exposureLayout = new QVBoxLayout;
+    layersLayout -> addWidget(layerDepthLabel);
+    layersLayout -> addWidget(layerDepth);
+    checkBoxLayout -> addWidget(autoFocus);
+    exposureLayout -> addWidget(exposureLabel);
+    exposureLayout -> addWidget(exposureSpinBox);
+    exposureLayout->addWidget(exposureSlider);
+    layersLayout->addWidget(deltaZLabel);
+    layersLayout->addWidget(deltaZ);
+    checkBoxLayout -> addWidget(autoWhiteBalance);
+    bottomLeftLayout = new QHBoxLayout;
+    bottomLeftLayout -> addLayout(layersLayout);
+    bottomLeftLayout -> addLayout(checkBoxLayout);
+    bottomLeftLayout -> addLayout(exposureLayout);
+
     settingsGroupBox -> setLayout(settingsLayout);
     settingsGroupBox->setFixedSize(200, 100);
     preview = new QPushButton(tr("Preview"));
