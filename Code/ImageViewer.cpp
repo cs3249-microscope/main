@@ -19,7 +19,7 @@ ImageViewer::ImageViewer(QString folderName)
     this -> setLayout(layout);
 }
 
-void ImageViewer::createActions()
+void ImageViewer::createConnections()
 {
     
     connect(imageWidget, SIGNAL(imageDepthChanged(int)),

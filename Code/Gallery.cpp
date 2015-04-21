@@ -6,23 +6,26 @@
 
 // Constructor
 
-Gallery::Gallery(QStringList listOfFiles)
+Gallery::Gallery(QString folderName)
 {
+    // get all files from folder
+    QDir *fileDir = new QDir(folderName);
+    QStringList listOfFiles = fileDir->entryList();
+    
     setUpFileList(listOfFiles);
     showFiles();
 }
 
-void setUpFileList(QStringList listOfFiles)
+void Gallery::setUpFileList(QStringList listOfFiles)
 {
-    fileList = listOfFiles;
     
     // create and show thumbnails of all files
-    for (int i = 0; i < fileList.size(); ++i) {
-        QImage img = QImage(fileList.at(i));
+    for (int i = 0; i < listOfFiles.size(); ++i) {
+        QImage img = QImage(listOfFiles.at(i));
         
         // scale into thumbnail
-        img.scaled(200, 200, Qt::IgnoreAspectRatio, Qt::FastTransformation).scaled(100, 100, Qt:IgnoreAspectRatio, Qt::SmoothTransformation);
-        QImage img(fileList.at(i));
+        img.scaled(200, 200, Qt::IgnoreAspectRatio, Qt::FastTransformation).scaled(100, 100, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+        
         
         //// scale into thumbnail here
         
@@ -32,24 +35,25 @@ void setUpFileList(QStringList listOfFiles)
     }
     
     
-    depth = 0;
+    currentImageDepth = 0;
 }
 
-void showFiles() {
+void Gallery::showFiles() {
     
     QGridLayout *galleryLayout = new QGridLayout();
     
     // show thumbnails here
     for (int i = 0; i < fileList.size(); ++i) {
         
-        QLabel picture = new QLabel(i);
-        QPixmap pixmap = QPixmap::convertFromImage(fileList.at(i), 0);
-        picture.setPixmap(picture);
+        QLabel *picture = new QLabel;
+        QPixmap pixmap;
+        pixmap.convertFromImage(fileList.at(i), 0);
+        picture -> setPixmap(pixmap);
         
-        galleryLayout -> addWidget(QLabel, i/4, i %4);
+        galleryLayout -> addWidget(picture, i/4, i %4);
         
         //// show active selection
-        if (i == depth) {
+        if (i == currentImageDepth) {
             
         }
     }
@@ -62,11 +66,11 @@ void showFiles() {
 }
 
 
-void changeImageDepth(int depth) {
+void Gallery::changeImageDepth(int depth) {
     
     if (currentImageDepth != depth) {
         currentImageDepth = depth;
-        currFile = fileList.at(depth);
+        QImage currFile = fileList.at(depth);
         
         //// change the active selection indication here.
         

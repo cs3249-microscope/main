@@ -13,7 +13,7 @@ class Gallery: public QWidget
     Q_OBJECT
 
 public:
-    Gallery();
+    Gallery(QString);
     ~Gallery();
 
 protected:
@@ -26,11 +26,11 @@ private slots:
     
 private:
 
-    void setUpFileList(QStringList listOfFiles)
+    void setUpFileList(QStringList listOfFiles);
     void showFiles();
 
     // Widgets and variables
-    QString currFile;
+
     QVector<QImage> fileList;
     int currentImageDepth;
 

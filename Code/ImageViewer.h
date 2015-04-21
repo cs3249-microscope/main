@@ -14,13 +14,13 @@ class ImageViewer: public QWidget
     Q_OBJECT
 
 public:
-    ImageViewer();
+    ImageViewer(QString folderName);
 
 protected:
     
 
 private slots:
-
+    void createConnections();
     
 private:
 
