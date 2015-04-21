@@ -14,7 +14,7 @@ class Gallery: public QWidget
 
 public:
     Gallery(QString);
-    ~Gallery();
+    Gallery();
 
 protected:
     

@@ -9,7 +9,7 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include "ImageWidget.h"
-// #include "ImageViewer.h"
+#include "ImageViewer.h"
 
 // Class declaration without loading .h files. Faster compilation.
 #include <QAction>
@@ -34,6 +34,7 @@ protected:
 private slots:
     void changeExposure();
     void sharpen();
+    void openPastScans();
 
 private:
     void createWidgets();
@@ -53,7 +54,7 @@ private:
     // settings
     QPushButton *preview;
     QPushButton *startCapture;
-    QPushButton *openPastScans;
+    QPushButton *openPastScansButton;
 
     QCheckBox *autoFocus;
     QCheckBox *autoWhiteBalance;
@@ -66,7 +67,8 @@ private:
     QSlider *exposureSlider;
 
     // Widgets and variables
-	ImageWidget *imageWidget;
+    ImageViewer *imageViewer;
+    ImageWidget *imageWidget;
     QString currFolder;
 
 };

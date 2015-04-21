@@ -16,8 +16,14 @@ Gallery::Gallery(QString folderName)
     showFiles();
 }
 
+Gallery::Gallery()
+{
+    
+}
+
 void Gallery::setUpFileList(QStringList listOfFiles)
 {
+    // get list of files and merge into image.
     
     // create and show thumbnails of all files
     for (int i = 0; i < listOfFiles.size(); ++i) {
