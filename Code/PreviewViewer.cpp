@@ -16,6 +16,13 @@ PreviewViewer::PreviewViewer()
     exposureList->append(QDir::currentPath()+"/PreviewExpo/expo3.png");
     exposureList->append(QDir::currentPath()+"/PreviewExpo/expo4.png");
     exposureList->append(QDir::currentPath()+"/PreviewExpo/expo5.png");
+
+    magList = new QStringList();
+    magList->append(QDir::currentPath()+"/Mag/mag0.png");
+    magList->append(QDir::currentPath()+"/Mag/mag1.png");
+    magList->append(QDir::currentPath()+"/Mag/mag2.png");
+    magList->append(QDir::currentPath()+"/Mag/mag3.png");
+
     createWidgets();
     createActions();
     createMenus();
@@ -174,6 +181,7 @@ void PreviewViewer::createActions()
      connect(exposureSlider, SIGNAL(valueChanged(int)), exposureSpinBox, SLOT(setValue(int)));
      connect(exposureSlider, SIGNAL(valueChanged(int)), this, SLOT(changeExposure()));
      connect(autoFocus, SIGNAL(stateChanged(int)),this,SLOT(sharpen()));
+     connect(magnification, SIGNAL(valueChanged(int)),this,SLOT(magnify()));
 //
 
 }
@@ -210,4 +218,10 @@ void PreviewViewer::sharpen()
         QImage image(QDir::currentPath()+"/Sharpen/sharp0.png");
         imageWidget->picture->setPixmap(QPixmap::fromImage(image));
     }
+}
+
+void PreviewViewer::magnify()
+{
+    QImage image(magList->at(magnification->value()));
+    imageWidget->picture->setPixmap(QPixmap::fromImage(image));
 }

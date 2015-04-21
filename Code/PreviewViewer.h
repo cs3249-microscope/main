@@ -34,6 +34,7 @@ protected:
 private slots:
     void changeExposure();
     void sharpen();
+    void magnify();
 
 private:
     void createWidgets();
@@ -47,6 +48,7 @@ private:
     QAction *toggleViewAction;
 
     QStringList *exposureList;
+    QStringList *magList;
 
     QMenu *fileMenu;
 
