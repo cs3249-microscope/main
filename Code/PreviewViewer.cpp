@@ -39,7 +39,7 @@ void PreviewViewer::closeEvent(QCloseEvent *event)
 
 void PreviewViewer::createWidgets()
 {
-    ImageWidget *imageWidget = new ImageWidget;
+    imageWidget = new ImageWidget;
     //imageWidget->setImage("/file.jpeg");
     QVBoxLayout* settings2Layout = new QVBoxLayout;
     //settings2Layout->addWidget(imageWidget);
@@ -82,14 +82,17 @@ void PreviewViewer::createActions()
     connect(exitAction, SIGNAL(triggered()), this, SLOT(close()));
 
 
+    toggledOn = false;
     toggleViewAction = new QAction(tr("&ToggleView"), this);
     toggleViewAction -> setShortcut(tr("Ctrl+V"));
     ///// connection to toggle the tab view.
+    connect(toggleViewAction, SIGNAL(triggered()), this, SLOT(toggleView()));
 
 
     // Other connections
     connect(exposureSpinBox, SIGNAL(valueChanged(int)), exposureSlider, SLOT(setValue(int)));
     connect(exposureSlider, SIGNAL(valueChanged(int)), exposureSpinBox, SLOT(setValue(int)));
+
 
 }
 
@@ -178,7 +181,15 @@ void PreviewViewer::createSettings()
 
 }
 
-
+void PreviewViewer::toggleView()
+{
+    toggledOn = !toggledOn;
+    if(toggledOn == true)
+    {
+    autoWhiteBalance = new QCheckBox(tr("AutoWhiteBalance"));
+    }
+    imageWidget->toggleSplitView(autoWhiteBalance, toggledOn);
+}
 
 
 

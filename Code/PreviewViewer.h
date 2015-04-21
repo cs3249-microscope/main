@@ -79,6 +79,13 @@ private:
     QSlider *exposureSlider;
 
     QString currFolder;
+
+    bool toggledOn;
+
+    ImageWidget *imageWidget;
+
+public slots:
+    void toggleView();
 };
 
 #endif // PREVIEWVIEWER_H

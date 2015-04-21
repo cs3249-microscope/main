@@ -30,7 +30,7 @@ ImageWidget::ImageWidget(QWidget *parent) : QWidget(parent)
         view->view()->setScene(scene);
                 h1Splitter->addWidget(view);
 
-        QVBoxLayout *layout = new QVBoxLayout;
+        layout = new QVBoxLayout;
         layout->addWidget(vSplitter);
         layout->addWidget(depthSlider);
         setLayout(layout);
@@ -59,4 +59,14 @@ void ImageWidget::Focus()
     QImage image(inputList->at(depthSlider->value()));
     picture->setPixmap(QPixmap::fromImage(image));
     scene->update();
+}
+
+void ImageWidget::toggleSplitView(QWidget *widget, bool toggledOn)
+{
+    if(toggledOn)
+    h1Splitter->addWidget(widget);
+    else
+    {
+      delete widget;
+    }
 }
