@@ -1,3 +1,5 @@
+// PreviewViewer.h
+
 #ifndef PREVIEWVIEWER_H
 #define PREVIEWVIEWER_H
 
@@ -6,16 +8,17 @@
 #include <QSpinBox>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
-
-#include <QAction>
-#include <QMenu>
-#include <QGroupBox>
-#include <QPushButton>
-#include <QCheckBox>
-#include <QMenuBar>
-#include <QLabel>
-
 #include "ImageWidget.h"
+// #include "ImageViewer.h"
+
+// Class declaration without loading .h files. Faster compilation.
+class QAction;
+class QMenu;
+class QGroupBox;
+class QPushButton;
+class QCheckBox;
+class QPlainTextEdit;
+
 
 class PreviewViewer: public QMainWindow
 {
@@ -28,12 +31,12 @@ public:
 protected:
     void closeEvent(QCloseEvent *event);
 
+private slots:
+
 private:
     void createWidgets();
     void createActions();
     void createMenus();
-    void createSettings();
-    void createPreviewImage();
 
     QAction *previewAction;
     QAction *startCaptureAction;
@@ -43,27 +46,7 @@ private:
 
     QMenu *fileMenu;
 
-    //Settings
-
-    QGroupBox *magnificationGroupBox;
-    QGroupBox *settingsGroupBox;
-
-    QLabel *layerDepthLabel;
-    QLabel *deltaZLabel;
-    QLabel *magnificationLabel;
-    QLabel *exposureLabel;
-
-    QHBoxLayout *magLayout;
-    QHBoxLayout *settingsLayout;
-    QHBoxLayout *layout;
-    QHBoxLayout *bottomLeftLayout;
-    QVBoxLayout *layersLayout;
-    QVBoxLayout *checkBoxLayout;
-    QVBoxLayout *exposureLayout;
-
-    QVBoxLayout *rightLayout;
-    QVBoxLayout *leftLayout;
-
+    // settings
     QPushButton *preview;
     QPushButton *startCapture;
     QPushButton *openPastScans;
@@ -78,15 +61,10 @@ private:
 
     QSlider *exposureSlider;
 
+    // Widgets and variables
+	ImageWidget *imageWidget;
     QString currFolder;
 
-    bool toggledOn;
-
-    ImageWidget *imageWidget;
-
-public slots:
-    void toggleView();
 };
 
-#endif // PREVIEWVIEWER_H
-
+#endif
