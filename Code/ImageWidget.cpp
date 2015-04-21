@@ -70,8 +70,8 @@ void ImageWidget::Focus(int newDepth)
 }
 
 void ImageWidget::changeImageDepth(int depth) {
-    depthSlider->setValue(depth);
-    
+	if ( depthSlider->value()!=depth )
+		depthSlider->setValue(depth);
 }
 
 void ImageWidget::toggleSplitView(QWidget *widget, bool toggledOn)
