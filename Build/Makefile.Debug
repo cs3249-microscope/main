@@ -242,6 +242,8 @@ debug/moc_ImageWidget.cpp: C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QWidg
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qlayout.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qlayoutitem.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qgridlayout.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QSplitter \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qsplitter.h \
 		../Code/ImageWidget.h
 	'C:\Qt\Qt5.4.1\5.4\mingw491_32\bin\moc.exe' $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/Qt5.4.1/5.4/mingw491_32/mkspecs/win32-g++ -IC:/Users/Bob/Documents/GitHub/main/Code -IC:/Users/Bob/Documents/GitHub/main/Code -IC:/Qt/Qt5.4.1/5.4/mingw491_32/include -IC:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtPrintSupport -IC:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtOpenGL -IC:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets -IC:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui -IC:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore -I. ../Code/ImageWidget.h -o debug/moc_ImageWidget.cpp
 
@@ -373,6 +375,33 @@ debug/moc_PreviewViewer.cpp: C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QMa
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QLabel \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qlabel.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qframe.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QSplitter \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qsplitter.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QAction \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qaction.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qactiongroup.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QMenu \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qmenu.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QGroupBox \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qgroupbox.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QPushButton \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qpushbutton.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qabstractbutton.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QCheckBox \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qcheckbox.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QPlainTextEdit \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qplaintextedit.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qtextedit.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qtextdocument.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qtextoption.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qtextcursor.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qtextformat.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qabstracttextdocumentlayout.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qtextlayout.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qglyphrun.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qrawfont.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qfontdatabase.h \
 		../Code/PreviewViewer.h
 	'C:\Qt\Qt5.4.1\5.4\mingw491_32\bin\moc.exe' $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/Qt5.4.1/5.4/mingw491_32/mkspecs/win32-g++ -IC:/Users/Bob/Documents/GitHub/main/Code -IC:/Users/Bob/Documents/GitHub/main/Code -IC:/Qt/Qt5.4.1/5.4/mingw491_32/include -IC:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtPrintSupport -IC:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtOpenGL -IC:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets -IC:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui -IC:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore -I. ../Code/PreviewViewer.h -o debug/moc_PreviewViewer.cpp
 
@@ -636,12 +665,39 @@ debug/main.o: ../Code/main.cpp C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/Q
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qlayout.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qlayoutitem.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qgridlayout.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QSplitter \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qsplitter.h \
 		../Code/PreviewViewer.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QMainWindow \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qmainwindow.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qtabwidget.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qicon.h \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QHBoxLayout
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QHBoxLayout \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QAction \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qaction.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qactiongroup.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QMenu \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qmenu.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QGroupBox \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qgroupbox.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QPushButton \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qpushbutton.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qabstractbutton.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QCheckBox \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qcheckbox.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QPlainTextEdit \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qplaintextedit.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qtextedit.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qtextdocument.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qtextoption.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qtextcursor.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qtextformat.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qabstracttextdocumentlayout.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qtextlayout.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qglyphrun.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qrawfont.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtGui/qfontdatabase.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/main.o ../Code/main.cpp
 
 debug/ImageWidget.o: ../Code/ImageWidget.cpp ../Code/view.h \
@@ -775,9 +831,9 @@ debug/ImageWidget.o: ../Code/ImageWidget.cpp ../Code/view.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qlayout.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qlayoutitem.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qgridlayout.h \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QHBoxLayout \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QSplitter \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qsplitter.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QHBoxLayout \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QGraphicsPixmapItem \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qgraphicsitem.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtCore/QDir \
@@ -1092,6 +1148,11 @@ debug/PreviewViewer.o: ../Code/PreviewViewer.cpp C:/Qt/Qt5.4.1/5.4/mingw491_32/i
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QWidget \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qwidget.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qsizepolicy.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QMenuBar \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qmenubar.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qmenu.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qaction.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qactiongroup.h \
 		../Code/PreviewViewer.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QMainWindow \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qmainwindow.h \
@@ -1114,7 +1175,22 @@ debug/PreviewViewer.o: ../Code/PreviewViewer.cpp C:/Qt/Qt5.4.1/5.4/mingw491_32/i
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qgraphicsscene.h \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QLabel \
 		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qlabel.h \
-		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qframe.h
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qframe.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QSplitter \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qsplitter.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QAction \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QMenu \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QGroupBox \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qgroupbox.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QPushButton \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qpushbutton.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qabstractbutton.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QCheckBox \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qcheckbox.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/QPlainTextEdit \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qplaintextedit.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qtextedit.h \
+		C:/Qt/Qt5.4.1/5.4/mingw491_32/include/QtWidgets/qabstractscrollarea.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/PreviewViewer.o ../Code/PreviewViewer.cpp
 
 debug/view.o: ../Code/view.cpp ../Code/view.h \

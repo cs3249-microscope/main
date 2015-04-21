@@ -29,7 +29,7 @@ private:
     QSplitter *h1Splitter;
     QSplitter *h2Splitter;
     QSlider *depthSlider;
-    QStringList *inputList;
+    QStringList *depthList;
     QVBoxLayout *layout;
 
 public slots:
