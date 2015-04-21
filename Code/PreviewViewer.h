@@ -35,6 +35,7 @@ private slots:
     void changeExposure();
     void sharpen();
     void magnify();
+    void wBalance();
     void openPastScans();
 
 private:

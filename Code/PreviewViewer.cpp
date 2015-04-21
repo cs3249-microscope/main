@@ -57,7 +57,7 @@ void PreviewViewer::createWidgets()
     QGroupBox *magnificationGroupBox = new QGroupBox(tr("Lens/ Magnification"));
     QLabel *magnificationLabel = new QLabel(tr("&Magnification"));
     magnification = new QSpinBox;
-    ///// magnification -> setRange(0, 300);
+    magnification->setRange(1,4);
     magnificationLabel -> setBuddy(magnification);
     
     QHBoxLayout *magLayout = new QHBoxLayout;
@@ -174,6 +174,7 @@ void PreviewViewer::createActions()
      connect(exposureSlider, SIGNAL(valueChanged(int)), exposureSpinBox, SLOT(setValue(int)));
      connect(exposureSlider, SIGNAL(valueChanged(int)), this, SLOT(changeExposure()));
      connect(autoFocus, SIGNAL(stateChanged(int)),this,SLOT(sharpen()));
+     connect(autoWhiteBalance, SIGNAL(stateChanged(int)),this,SLOT(wBalance()));
      connect(magnification, SIGNAL(valueChanged(int)),this,SLOT(magnify()));
 //
 
@@ -216,7 +217,7 @@ void PreviewViewer::sharpen()
 
 void PreviewViewer::magnify()
 {
-    QImage image(magList->at(magnification->value()));
+    QImage image(magList->at(magnification->value()-1));
     imageWidget->picture->setPixmap(QPixmap::fromImage(image));
 }
 
@@ -234,4 +235,17 @@ void PreviewViewer::openPastScans()
     }
 }
 
+void PreviewViewer::wBalance()
+{
+    if(autoWhiteBalance->isChecked())
+    {
+        QImage image(QDir::currentPath()+"/WhiteBalance/wBalance1.png");
+        imageWidget->picture->setPixmap(QPixmap::fromImage(image));
+    }
+    else
+    {
+        QImage image(QDir::currentPath()+"/WhiteBalance/wBalance0.png");
+        imageWidget->picture->setPixmap(QPixmap::fromImage(image));
+    }
+}
 
