@@ -92,9 +92,9 @@ void PreviewViewer::createWidgets()
 
     QLabel *exposureLabel = new QLabel(tr("Exposure"));
     exposureSpinBox = new QSpinBox;
-exposureSpinBox -> setRange(0, 4);
+    exposureSpinBox -> setRange(0, 4);
     exposureSlider = new QSlider(Qt::Horizontal);
-exposureSlider -> setRange(0, 4);
+    exposureSlider -> setRange(0, 4);
 
     QHBoxLayout *exposureLabelSpinBox = new QHBoxLayout;
     exposureLabelSpinBox -> addWidget(exposureLabel);
@@ -117,6 +117,8 @@ exposureSlider -> setRange(0, 4);
     startCapture = new QPushButton(tr("Start capture"));
     openPastScansButton = new QPushButton(tr("Open past scans"));
 
+magnificationGroupBox->setMaximumSize(200, 100);
+settingsGroupBox->setMaximumSize(200,400);
 
 	QVBoxLayout *vlayout = new QVBoxLayout;
 	vlayout -> addWidget(magnificationGroupBox);

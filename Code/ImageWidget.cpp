@@ -22,6 +22,7 @@ ImageWidget::ImageWidget(QWidget *parent) : QWidget(parent)
     picture = scene->addPixmap(QPixmap::fromImage(image));
     createDepthSlider();
     connect(depthSlider, SIGNAL(valueChanged(int)), this, SLOT(Focus(int)));
+    connect(depthSlider, SIGNAL(valueChanged(int)), this, SIGNAL(imageDepthChanged(int)));
 
     h1Splitter = new QSplitter;
     h2Splitter = new QSplitter;
@@ -68,6 +69,11 @@ void ImageWidget::Focus(int newDepth)
     scene->update();
 }
 
+void ImageWidget::changeImageDepth(int depth) {
+    depthSlider->setValue(depth);
+    
+}
+
 void ImageWidget::toggleSplitView(QWidget *widget, bool toggledOn)
 {
     if(toggledOn)
@@ -77,3 +83,4 @@ void ImageWidget::toggleSplitView(QWidget *widget, bool toggledOn)
       delete widget;
     }
 }
+

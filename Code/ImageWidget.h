@@ -20,9 +20,10 @@ public:
     QGraphicsPixmapItem *picture; //Modify this with setPixmap anywhere to change picture. Ideally put QInputList object here in public as well.
     void toggleSplitView(QWidget *widget, bool toggledOn);
     void populateScene();
-
+    
 signals:
-	void imageDepthChanged(int);
+    void imageDepthChanged(int);
+
 private:
     void setupMatrix();
     void createDepthSlider();
@@ -38,7 +39,7 @@ private:
 
 public slots:
     void Focus(int);
-
+    void changeImageDepth(int);
 };
 
 #endif //IMAGEWIDGET_H

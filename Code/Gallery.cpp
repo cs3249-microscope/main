@@ -99,10 +99,23 @@ void Gallery::showFiles() {
     listWidget -> setResizeMode(QListWidget::Adjust);
     listWidget -> setSelectionMode(QAbstractItemView::SingleSelection);
 
-    listWidget -> addItem("pic1");
-    listWidget -> addItem("pic2");
-    listWidget -> addItem("pic3");
-    listWidget -> addItem("pic4");
+    listWidget -> setMaximumSize(800, 40);
+    QListWidgetItem *itm  = new QListWidgetItem();
+    itm->setIcon(QIcon(QDir::currentPath()+"/thumbnails/t1.png"));
+    listWidget -> addItem(itm);
+    itm  = new QListWidgetItem();
+    itm->setIcon(QIcon(QDir::currentPath()+"/thumbnails/t2.png"));
+    listWidget -> addItem(itm);
+    itm  = new QListWidgetItem();
+    itm->setIcon(QIcon(QDir::currentPath()+"/thumbnails/t3.png"));
+    listWidget -> addItem(itm);
+    itm  = new QListWidgetItem();
+    itm->setIcon(QIcon(QDir::currentPath()+"/thumbnails/t4.png"));
+    listWidget -> addItem(itm);
+    itm  = new QListWidgetItem();
+    itm->setIcon(QIcon(QDir::currentPath()+"/thumbnails/t5.png"));
+    listWidget -> addItem(itm);
+
     
     
     
@@ -113,9 +126,12 @@ void Gallery::showFiles() {
     
     galleryLayout -> addWidget(listWidget);
     this -> setLayout(galleryLayout);
+
+    connect(listWidget, SIGNAL(itemClicked(QListWidgetItem*)),this,SLOT(onListItemClicked(QListWidgetItem*)));
+
     
-    connect(listWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)),
-            this, SLOT(changeImageDepth(QListWidgetItem *, QListWidgetItem *)));
+    //connect(listWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)),
+           // this, SLOT(changeImageDepth(QListWidgetItem *, QListWidgetItem *)));
 //
 //    
 
@@ -144,13 +160,14 @@ void Gallery::changeImageDepth(QListWidgetItem *curr, QListWidgetItem *prev) {
 
 void Gallery::changeImageDepth(int depth) {
     
-    //    if (currentImageDepth != depth) {
-    //        currentImageDepth = depth;
-    //        QImage currFile = fileList.at(depth);
-    //
-    //        //// change the active selection indication here.
-    //
-    //
+        if (currentImageDepth != depth) {
+            currentImageDepth = depth;
+//            QImage currFile = fileList.at(depth);
+            
+    
+            //// change the active selection indication here.
+    
+    
     
     
     
